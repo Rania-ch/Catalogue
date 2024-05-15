@@ -1,7 +1,17 @@
 <div class="container">
-    <div class="card">
+    <ng-template #errors><div class="text-danger">{{errorMessage}}</div></ng-template>
+    <div class="card" *ngIf="products ; else errors">
         <div class="card-header">Products List</div>
         <div class="card-body">
+             <form [formGroup]="searchFormGroup" (ngSubmit)="handleSearchProducts()" >
+                <div class="input-group">
+                    <label class="input-group-text">Keyword:</label>
+                    <input type="text" class="form-control" formControlName="Keyword">
+                    <button class="btn btn-info">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form> 
             <table class="table">
                 <thead>
                     <tr>
@@ -15,6 +25,11 @@
                         <td>{{p.id}}</td>
                         <td>{{p.name}}</td>
                         <td>{{p.price}}</td>
+                        <td><i *ngIf="p.promotion==true" class="bi bi-heart-fill text-success"></i></td>
+                        <button  (click)="handleSetPromotion(p)"  [ngClass]="p.promotion==true? 'btn-danger' :'btn-success'" class="btn">
+                            <span *ngIf="p.promotion==false">Promo On</span>
+                            <span *ngIf="p.promotion==true">Promo Off</span>
+                        </button>
                         <td><button  (click)="handleDeleteProduct(p)"  class="btn btn-danger">
                             <i class="bi bi-trash"></i>
                         </button></td>
@@ -22,6 +37,11 @@
                     </tr>
                 </tbody>
             </table>
+            <ul class="nav nav-pills">
+                <li *ngFor="let item of [].constructor(this.totalPages); let i=index">
+                <a (click)="gotoPage(i)" [ngClass]="i==currentPage?'btn-info':'btn-outline-info'" class="btn ms-1 mt-1">{{i}}</a>
+                </li>
+            </ul>
         </div>
     </div>
 </div>
