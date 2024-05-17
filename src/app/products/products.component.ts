@@ -1,3 +1,4 @@
+import { AuthenticationService } from './../services/authentication.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Product } from '../model/product.model';
 import { ProductService } from './../services/product.service';
@@ -20,7 +21,7 @@ export class ProductsComponent implements OnInit {
   pageSize:number =5;
   totalPages : number=0;
   currentAction :string="all"
-  constructor(private ProductService : ProductService, private fb : FormBuilder) { }
+  constructor(private ProductService : ProductService, private fb : FormBuilder, public authService : AuthenticationService) { }
 
   ngOnInit(): void {
  
