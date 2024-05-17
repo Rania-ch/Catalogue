@@ -1,5 +1,5 @@
-import { AppUser } from './../model/user.model';
-import { AuthenticationService } from './../services/authentication.service';
+import { AppUser } from '../../model/user.model';
+import { AuthenticationService } from '../../services/authentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';

@@ -1,8 +1,9 @@
-import { AuthenticationService } from './../services/authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Product } from '../model/product.model';
-import { ProductService } from './../services/product.service';
+import { Product } from '../../model/product.model';
+import { ProductService } from '../../services/product.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,8 +13,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit {
 
-
-
+ 
   products! : Array<Product>;
   errorMessage! : string;
   searchFormGroup! : FormGroup;
@@ -21,7 +21,8 @@ export class ProductsComponent implements OnInit {
   pageSize:number =5;
   totalPages : number=0;
   currentAction :string="all"
-  constructor(private ProductService : ProductService, private fb : FormBuilder, public authService : AuthenticationService) { }
+  constructor(private ProductService : ProductService, private fb : FormBuilder, public authService : AuthenticationService
+    , private router : Router) { }
 
   ngOnInit(): void {
  
@@ -95,4 +96,11 @@ export class ProductsComponent implements OnInit {
     else
       this.handleSearchProducts();
       }
+
+      handleNewProduct() {
+        this.router.navigateByUrl("admin-template/new-product")
+        }
+        handleEditProduct(p: Product) {
+         this.router.navigateByUrl("admin-template/edit-product/" +p.id)
+          }
 }
